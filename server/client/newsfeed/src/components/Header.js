@@ -8,7 +8,7 @@ class Header extends React.Component{
     }
 
     renderAuth(){
-        if(this.props.user===null||this.props.user===false){
+        if(this.props.user==null||this.props.user===false){
             return <a href ="/auth/google" className="item">Log In with Google</a>
         }else{
             return <a href ="/api/logout" className="item">Log Out</a>

@@ -5,6 +5,7 @@ const passport = require('passport')
 const bodyparser = require('body-parser')
 const keys = require('./config/dev')
 require('./models/User');
+require('./models/Post');
 var app = express()
 app.use(bodyparser.json());
 
@@ -17,5 +18,5 @@ require('./services/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 require('./routers/authRouter')(app);
-
+require('./routers/postRouter')(app);
 app.listen(5000);
