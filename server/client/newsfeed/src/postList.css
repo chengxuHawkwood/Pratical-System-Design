@@ -1,0 +1,10 @@
+#newPostIcon{
+    position:fixed;
+    bottom: 40px;
+    right: 90px;
+}
+#newFriendIcon{
+    position:fixed;
+    bottom: 40px;
+    left: 50px;
+}

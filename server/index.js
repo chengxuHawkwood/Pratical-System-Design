@@ -19,4 +19,5 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./routers/authRouter')(app);
 require('./routers/postRouter')(app);
+require('./routers/FollowRouter')(app);
 app.listen(5000);
