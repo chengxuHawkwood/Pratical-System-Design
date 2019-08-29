@@ -14,6 +14,9 @@ module.exports=(app)=>{
           for(i=0;i<followees.length;i++){
             list.push(...await Post.find({_user:followees[i]}).sort({created_at:-1}).limit(10).populate('_user'))
           }
+          list = list.sort(function (a, b) {
+            return -new Date(a.created_at).getTime() + new Date(b.created_at).getTime()
+          });
           res.send(list);
         }catch(err){
           console.log(err)

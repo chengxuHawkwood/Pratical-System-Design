@@ -32,7 +32,6 @@ export const unfollow = (follow_id) =>async(dispatch, getState)=>{
    let user =  getState().user
    user.follows=user.follows.filter(e=>e!==follow_id)
    await axios.patch('/api/users', user);
-   await fetchUser();
    history.push('/')
 }
 

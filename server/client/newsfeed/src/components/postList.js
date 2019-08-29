@@ -1,5 +1,5 @@
 import React from 'react'
-import {fetchOwnPosts} from '../actions'
+import {fetchOwnPosts, unfollow} from '../actions'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import '../postList.css'
@@ -17,8 +17,15 @@ class postList extends React.Component{
 
         }
     }
-    renderList(){
+    renderUnfollow(user_id){
+        if(user_id!==this.props.user._id){
 
+            return <button className="ui primary button unfollow" onClick={async ()=>{await this.props.unfollow(user_id); this.props.fetchOwnPosts();} }>Unfollow</button>
+        }
+    }
+
+    renderList(){
+        
         if(this.props.posts!=null){
 
             return this.props.posts.map((post)=>{
@@ -28,6 +35,7 @@ class postList extends React.Component{
                            <img src={post._user.photo} /> 
                         </div>
                             <div className="content">
+                            {this.renderUnfollow(post._user._id)}
                                 <div className="summary">
                                     <a className="user">
                                     {post._user.name}
@@ -42,9 +50,11 @@ class postList extends React.Component{
                                     <i className="like icon"></i> 4 Likes
                                     </a>
                                 </div> */}
+                                
                                 <div className="extra text">
                                     {post.message}
                                 </div>
+                                
                         </div>
                     </div>
 
@@ -52,6 +62,8 @@ class postList extends React.Component{
             })
         }
     }
+   
+
     render(){
 
         return(
@@ -73,4 +85,4 @@ const mapStateToMap=(state)=>{
         user:state.user
     }
 }
-export default connect(mapStateToMap,{fetchOwnPosts})(postList)
+export default connect(mapStateToMap,{fetchOwnPosts,unfollow})(postList)

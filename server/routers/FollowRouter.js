@@ -21,6 +21,7 @@ module.exports = (app)=>{
                 let toadd = await User.findOne().skip(random)
                 if(!list.includes(toadd)) list.push(toadd)
             }
+            list.sort((a,b)=>{a._id-b._id})
             res.send(list);
 
         }else{

@@ -6,5 +6,9 @@
 #newFriendIcon{
     position:fixed;
     bottom: 40px;
-    left: 50px;
+    right: 0px;
+}
+.unfollow{
+    position: relative;
+    right:150px;
 }
