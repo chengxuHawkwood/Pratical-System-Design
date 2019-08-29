@@ -1,5 +1,4 @@
 import history from '../history';
-
 import axios from 'axios';
 import {FETCH_USER, CREATE_POST, FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW} from './types'
 
@@ -23,10 +22,20 @@ export const follow = (follow_id) =>async(dispatch, getState)=>{
    const user =  getState().user
    if(!user.follows.includes(follow_id)) user.follows.push(follow_id);
    await axios.patch('/api/users', user);
-   fetchUser();
+   await fetchUser();
    history.push('/')
+   
 
 }
+
+export const unfollow = (follow_id) =>async(dispatch, getState)=>{
+   let user =  getState().user
+   user.follows=user.follows.filter(e=>e!==follow_id)
+   await axios.patch('/api/users', user);
+   await fetchUser();
+   history.push('/')
+}
+
 
 export const fetchFollows=(formValues)=>async (dispatch)=>{
    const followers =  await axios.get('/api/users',  {

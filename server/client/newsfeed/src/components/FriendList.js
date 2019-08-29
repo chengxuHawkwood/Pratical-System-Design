@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchFollows, follow} from '../actions'
+import {fetchFollows, follow, unfollow} from '../actions'
 class FriendList extends React.Component{
     componentDidMount(){
         this.props.fetchFollows();
@@ -9,7 +9,7 @@ class FriendList extends React.Component{
         this.props.follow(follow_id);
     }
     unfollow(follow_id){
-        
+        this.props.unfollow(follow_id);
     }
     renderList(){
 
@@ -67,4 +67,4 @@ const mapStateToProps=(state)=>{
     }
     
 }
-export default connect(mapStateToProps,{fetchFollows, follow})(FriendList);
+export default connect(mapStateToProps,{fetchFollows, follow, unfollow})(FriendList);
