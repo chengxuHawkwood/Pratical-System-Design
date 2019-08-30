@@ -5,6 +5,7 @@ import history from '../history'
 import postNew from './postNew'
 import postList from './postList'
 import FriendNew from './FriendNew'
+import FailureView from './FailureView';
 class App extends React.Component{
   render(){
     return(
@@ -16,6 +17,7 @@ class App extends React.Component{
                 <Route path="/posts/new" exact component={postNew}/>
                 <Route path="/" exact component={postList}/>
                 <Route path="/friends/new" exact component={FriendNew}/>
+                <Route path="/ErrorPage" exact component={FailureView}/>
             </Switch>
         </div>
       </Router>

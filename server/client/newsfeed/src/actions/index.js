@@ -1,6 +1,6 @@
 import history from '../history';
 import axios from 'axios';
-import {FETCH_USER, CREATE_POST, FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW} from './types'
+import {FETCH_USER, ERROR, CREATE_POST, FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW} from './types'
 
 export const fetchUser=()=>async (dispatch)=>{
    const user =  await axios.get('/api/current_user');
@@ -8,9 +8,18 @@ export const fetchUser=()=>async (dispatch)=>{
 };
 
 export const createPost = (formValues)=> async(dispatch)=>{
-   const response = await axios.post('/api/posts', {...formValues});
-   dispatch({type:CREATE_POST, payload: response.data})
-   history.push('/');
+   try{
+      const response = await axios.post('/api/posts', {...formValues});
+
+      dispatch({type:CREATE_POST, payload: response.data})
+      history.push('/');
+      
+   }catch(err){
+      dispatch({type:ERROR, payload:429})
+      history.push('/ErrorPage');
+   }
+
+  
 };
 
 export const fetchOwnPosts = ()=> async(dispatch)=>{
