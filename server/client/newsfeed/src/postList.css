@@ -12,3 +12,8 @@
     position: relative;
     right:150px;
 }
+
+.updateButton{
+    position: relative;
+    left:-50%;
+}

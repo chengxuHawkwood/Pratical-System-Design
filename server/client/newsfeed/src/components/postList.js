@@ -3,9 +3,10 @@ import {fetchOwnPosts, unfollow} from '../actions'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import '../postList.css'
+import {pageConf} from '../config/PageConfig'
 class postList extends React.Component{
     componentDidMount(){
-        this.props.fetchOwnPosts();
+        this.props.fetchOwnPosts(0);
     }
     renderNewPostButton(){
         if(this.props.user)
@@ -20,9 +21,18 @@ class postList extends React.Component{
     renderUnfollow(user_id){
         if(user_id!==this.props.user._id){
 
-            return <button className="ui primary button unfollow" onClick={async ()=>{await this.props.unfollow(user_id); this.props.fetchOwnPosts();} }>Unfollow</button>
+            return <button className="ui primary button unfollow" onClick={async ()=>{await this.props.unfollow(user_id); this.props.fetchOwnPosts(0);} }>Unfollow</button>
         }
     }
+
+    loadNewer=()=>{
+        this.props.fetchOwnPosts(this.props.offset-pageConf.pageSize);
+    }
+
+    loadOlder=()=>{
+        this.props.fetchOwnPosts(this.props.offset+pageConf.pageSize);
+    }
+
 
     renderList(){
         
@@ -62,16 +72,31 @@ class postList extends React.Component{
             })
         }
     }
-   
-
+    
+    renderNewer=()=>{
+        if(this.props.offset!==0){
+            return(
+                <button className="ui primary button updateButton" onClick={this.loadNewer}>More feeds</button>
+            )
+        }
+    }
+    renderOlder=()=>{
+        if(this.props.posts.length===pageConf.pageSize){
+            return(
+                <button className="ui primary button updateButton" onClick={this.loadOlder}>More feeds</button>
+            )
+        }
+    }
     render(){
 
         return(
             <div className="container">
                 <div className="ui feed container">
+                    {this.renderNewer()}
                     {this.renderList()}
                     {this.renderNewPostButton()}
                     {this.renderNewFriendButton()}
+                    {this.renderOlder()}
                 </div>
                 
             </div>
@@ -82,7 +107,8 @@ class postList extends React.Component{
 const mapStateToMap=(state)=>{
     return {
         posts:Object.values(state.posts),
-        user:state.user
+        user:state.user,
+        offset:state.pageoffset
     }
 }
 export default connect(mapStateToMap,{fetchOwnPosts,unfollow})(postList)

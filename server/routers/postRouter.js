@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Post = mongoose.model('posts');
 const User = mongoose.model('users');
 const RateLimiter = require('../middlewares/RateLimiter');
+const pageConf = require('../config/PageConfig')
 const concat = async (x,y) =>
   await x.concat(y)
 module.exports=(app, redisclient)=>{
@@ -12,13 +13,17 @@ module.exports=(app, redisclient)=>{
           let followees = await User.findById(req.user.id,['follows']);
           followees = Object.values(followees.follows);
           let list =[]
+          let {offset} = req.query;
+          offset =Math.max(offset,0);
+          let batch = Math.floor(offset/(followees.length*pageConf.pageSize));
+          let batchoffset = offset % (followees.length*pageConf.pageSize);
           for(i=0;i<followees.length;i++){
-            list.push(...await Post.find({_user:followees[i]}).sort({created_at:-1}).limit(10).populate('_user'))
+            list.push(...await Post.find({_user:followees[i]}).sort({created_at:-1}).skip(batch*pageConf.pageSize).limit(pageConf.pageSize).populate('_user'))
           }
           list = list.sort(function (a, b) {
             return -new Date(a.created_at).getTime() + new Date(b.created_at).getTime()
           });
-          res.send(list);
+          res.send(list.slice(Math.min(batchoffset,list.length-1), Math.min(list.length, batchoffset+pageConf.pageSize)));
         }catch(err){
           console.log(err)
         }

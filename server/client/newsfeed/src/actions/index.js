@@ -1,6 +1,6 @@
 import history from '../history';
 import axios from 'axios';
-import {FETCH_USER, ERROR, CREATE_POST, FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW} from './types'
+import {FETCH_USER, ERROR, PAGINATION ,CREATE_POST, FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW} from './types'
 
 export const fetchUser=()=>async (dispatch)=>{
    const user =  await axios.get('/api/current_user');
@@ -22,9 +22,15 @@ export const createPost = (formValues)=> async(dispatch)=>{
   
 };
 
-export const fetchOwnPosts = ()=> async(dispatch)=>{
-   const response = await axios.get('/api/posts');
+export const fetchOwnPosts = (offset)=> async(dispatch, getState)=>{
+   dispatch({type: PAGINATION, payload: offset})
+   const response = await axios.get('/api/posts', {
+      params: {
+         offset : getState().pageoffset
+       }
+   });
    dispatch({type: FETCH_POSTS, payload:response.data})
+   
 }
 
 export const follow = (follow_id) =>async(dispatch, getState)=>{
