@@ -20,7 +20,6 @@ class postList extends React.Component{
     }
     renderUnfollow(user_id){
         if(user_id!==this.props.user._id){
-
             return <button className="ui primary button unfollow" onClick={async ()=>{await this.props.unfollow(user_id); this.props.fetchOwnPosts(0);} }>Unfollow</button>
         }
     }
