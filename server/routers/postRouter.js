@@ -4,17 +4,22 @@ const Post = mongoose.model('posts');
 const User = mongoose.model('users');
 const RateLimiter = require('../middlewares/RateLimiter');
 const pageConf = require('../config/PageConfig')
+const Friendship =mongoose.model('friendships');
 const concat = async (x,y) =>
   await x.concat(y)
 module.exports=(app, redisclient)=>{
     //pull model find each followes' recent activity and merge them to provide for the user
     app.get('/api/posts',requireLogin, async(req, res)=>{
         try{
-          let followees = await User.findById(req.user.id,['follows']);
-          followees = Object.values(followees.follows);
-          let list =[]
+          let followees =[]
+          followees = [req.user._id] 
+          
+          let toadd = await Friendship.find({from:req.user.id},{to:1})
+          if(toadd.length!=0) followees = [...toadd.map(x=>x.to),...followees]
+          let list =[];
           let {offset} = req.query;
           offset =Math.max(offset,0);
+          
           let batch = Math.floor(offset/(followees.length*pageConf.pageSize));
           let batchoffset = offset % (followees.length*pageConf.pageSize);
           for(i=0;i<followees.length;i++){

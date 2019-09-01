@@ -26,7 +26,6 @@ passport.use(new GoogleStrategy({
     const user = await User.findOne({googleId:profile.id})
     if(!user){
         const newuser =  new User({googleId:profile.id, name:profile.displayName, photo:profile.photos[0].value})
-        newuser.follows = [...newuser.follows, newuser._id];
         await newuser.save()
         cb(null, newuser)
     }else{

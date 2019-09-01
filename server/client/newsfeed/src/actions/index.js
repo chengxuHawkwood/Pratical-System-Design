@@ -1,6 +1,6 @@
 import history from '../history';
 import axios from 'axios';
-import {FETCH_USER, ERROR, PAGINATION ,CREATE_POST, FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW} from './types'
+import {FETCH_USER, ERROR, PAGINATION ,CREATE_POST, FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW, FETCH_ALREADY_FOLLOWERS} from './types'
 
 export const fetchUser=()=>async (dispatch)=>{
    const user =  await axios.get('/api/current_user');
@@ -33,20 +33,21 @@ export const fetchOwnPosts = (offset)=> async(dispatch, getState)=>{
    
 }
 
-export const follow = (follow_id) =>async(dispatch, getState)=>{
-   const user =  getState().user
-   if(!user.follows.includes(follow_id)) user.follows.push(follow_id);
-   await axios.patch('/api/users', user);
+export const follow = (follow_id) =>async(dispatch)=>{
+   // const user =  getState().user
+   // if(!user.follows.includes(follow_id)) user.follows.push(follow_id);
+   await axios.post('/api/friendship', {follow_id});
    await fetchUser();
+   
    history.push('/')
    
 
 }
 
 export const unfollow = (follow_id) =>async(dispatch, getState)=>{
-   let user =  getState().user
-   user.follows=user.follows.filter(e=>e!==follow_id)
-   await axios.patch('/api/users', user);
+   await axios.delete('/api/friendship', {
+      data:{follow_id}
+   })
    history.push('/')
 }
 
@@ -57,5 +58,7 @@ export const fetchFollows=(formValues)=>async (dispatch)=>{
          followee : formValues?formValues.Followee:-1
        }
    });
+   const already_follower  =await axios.get('/api/friendship')
+   dispatch({type:FETCH_ALREADY_FOLLOWERS, payload:already_follower.data});
    dispatch({type:FETCH_FOLLOWERS, payload:followers.data });
 };

@@ -6,6 +6,7 @@ const bodyparser = require('body-parser')
 const keys = require('./config/dev')
 require('./models/User');
 require('./models/Post');
+require('./models/Friendship');
 var redis = require('redis')
 var bluebird = require("bluebird");
 bluebird.promisifyAll(redis);
@@ -37,4 +38,5 @@ app.use(passport.session());
 require('./routers/authRouter')(app);
 require('./routers/postRouter')(app, client);
 require('./routers/FollowRouter')(app);
+require('./routers/FriendShipRouter')(app);
 app.listen(5000);

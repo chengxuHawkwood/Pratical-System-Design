@@ -12,13 +12,13 @@ class FriendList extends React.Component{
         this.props.unfollow(follow_id);
     }
     renderList(){
-
         
-        return this.props.follwers.map((follower)=>{
+        return this.props.tofollwers.map((follower)=>{
+            
             if(follower!==-1&&follower._id===this.props.user._id){
                 return null;
             }
-            if(follower!==-1&&this.props.user.follows.includes(follower._id)){
+            if(follower!==-1&&this.props.followers.includes(follower._id)){
                return( 
                <div className="item" key={follower.id}>
                     <img className="ui avatar image" src={follower.photo}></img>
@@ -46,7 +46,7 @@ class FriendList extends React.Component{
     }
     render(){
 
-        if(this.props.follwers.length===0){
+        if(this.props.tofollwers.length===0){
             return(
                 <h1>No such User</h1>
             )
@@ -62,7 +62,8 @@ class FriendList extends React.Component{
 
 const mapStateToProps=(state)=>{
     return{
-        follwers:Object.values(state.followers),
+        tofollwers:Object.values(state.tofollowers),
+        followers:Object.values(state.followers).map((x)=>(x.to)),
         user: state.user
     }
     
