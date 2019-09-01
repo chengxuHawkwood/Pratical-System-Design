@@ -1,6 +1,8 @@
 import history from '../history';
 import axios from 'axios';
-import {FETCH_USER, ERROR, PAGINATION ,CREATE_POST, FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW, FETCH_ALREADY_FOLLOWERS} from './types'
+import {FETCH_USER, ERROR, PAGINATION ,CREATE_POST, 
+      FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW, 
+      FETCH_ALREADY_FOLLOWERS, FETCH_FRIENDS} from './types'
 
 export const fetchUser=()=>async (dispatch)=>{
    const user =  await axios.get('/api/current_user');
@@ -51,6 +53,15 @@ export const unfollow = (follow_id) =>async(dispatch, getState)=>{
    history.push('/')
 }
 
+
+export const fetchfriends = ()=>async(dispatch)=>{
+   const friends = await axios.get('/api/friendship',{
+      params:{
+         type: 'friends'
+      }
+   })
+   dispatch({type:FETCH_FRIENDS,payload:friends.data})
+}
 
 export const fetchFollows=(formValues)=>async (dispatch)=>{
    const followers =  await axios.get('/api/users',  {

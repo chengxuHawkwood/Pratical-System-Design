@@ -6,3 +6,4 @@ export const FETCH_ALREADY_FOLLOWERS = 'fetch_followeds';
 export const FOLLOW = 'follow';
 export const ERROR = 'error';
 export const PAGINATION = 'pagination';
+export const FETCH_FRIENDS = 'fetch_friends';

@@ -20,7 +20,7 @@ class FriendList extends React.Component{
             }
             if(follower!==-1&&this.props.followers.includes(follower._id)){
                return( 
-               <div className="item" key={follower.id}>
+               <div className="item" key={follower._id}>
                     <img className="ui avatar image" src={follower.photo}></img>
                     <div className="content">
                         <a className="header">{follower.name}</a>

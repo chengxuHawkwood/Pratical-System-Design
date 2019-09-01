@@ -6,6 +6,7 @@ import {tofollwerReducer} from './tofollwerReducer'
 import {ErrorStatusReducer} from './ErrorStatusReducer';
 import {PageReducer} from './PageReducer';
 import {followerReducer} from './followerReducer'
+import {friendsReducer} from './friendsReducer'
 export default combineReducers({
     user: authUserReducer,
     form: formReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
     followers:followerReducer,
     status: ErrorStatusReducer,
     pageoffset: PageReducer,
+    friends: friendsReducer
 });

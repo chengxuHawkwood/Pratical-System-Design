@@ -7,6 +7,12 @@ module.exports =(app)=>{
         try{
             const {type} = req.query
             switch (type){
+                case 'friends':
+                    let candicates = await Friendship.find({from:req.user._id}).select('to');
+                    candicates = candicates.map(x=>x.to);
+                    const followees = await Friendship.where('from').in(candicates).find({to:req.user._id}).populate('from');
+                    res.send(followees.map(x=>x.from));
+                    return
                 default:
                     const followers = await Friendship.find({from:req.user._id})
                     res.send(followers);
