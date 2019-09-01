@@ -25,6 +25,7 @@ client.on('connect',function(){
 var app = express()
 app.use(bodyparser.json());
 
+
 mongoose.connect(keys.mongoURI)
 app.use(cookieSession({
     maxAge: 86400*1000*30, //This equals 30 days
