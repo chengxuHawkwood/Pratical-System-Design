@@ -6,3 +6,5 @@ Finish a MVP of a newsfeed system based on pull model and authentication with se
 Using redis to maintain each IP's recent k visits in m milleseconds where k and m are the configurations of the middleware. The redis record data structure is like [[ip+method]:[timestamp1, timestamp2,...]]. 
 # Update:Add pagination designs to the postlist
 Make use of an offset state to manage the pagination.
+# Update:Add core part of chat system. Users that follow each other are considered friends
+Simple version: poll the server every three seconds to get most recent chat history. Use the SHA512 hash result of sorted users list as an index of thread table which represent a chat session between specific users.
