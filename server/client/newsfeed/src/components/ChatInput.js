@@ -1,24 +1,35 @@
 import React from 'react'
 import {Field, reduxForm} from 'redux-form'
+import {connect} from 'react-redux'
+import {send_message} from '../actions'
 import '../chatInput.css'
 class ChatInput extends React.Component{
     renderInput(formProps){
         return(
             <div className="field ui form ">
-                <textarea  {...formProps.input} placeholder="chat here"/>
+                <textarea className="sendContent" {...formProps.input} placeholder="chat here"/>
             </div>
         ) 
+    }
+    onSubmit=(formProps)=>{
+        this.props.send_message(formProps.message, this.props.thread.thread);
     }
     render(){
         return(
             <div className="chatInput">
-                <form className="ui form  container ">
+                <form className="ui form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field  name="message" component={this.renderInput}/>
+                <button className="ui primary button ">send</button>
                 </form>
             </div>
         )
     }
 }
-export default reduxForm({
+const mapStateToProps=(state)=>{
+    return{
+        thread:state.userthread
+    }
+}
+export default connect(mapStateToProps, {send_message})(reduxForm({
     form:'ChatInput'
-})(ChatInput);
+})(ChatInput));

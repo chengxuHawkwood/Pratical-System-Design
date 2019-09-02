@@ -1,5 +1,12 @@
 .chatInput{
     position: absolute;
+    float: left;
     bottom: 20px;
-    width: 95%
+    width: 80%;
+    align-content: center
+}
+.sendContent{
+    width:90%;
+    word-wrap:break-word; 
+    word-break:break-all; 
 }

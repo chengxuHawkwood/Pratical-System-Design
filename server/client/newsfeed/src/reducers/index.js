@@ -8,6 +8,7 @@ import {PageReducer} from './PageReducer';
 import {followerReducer} from './followerReducer'
 import {friendsReducer} from './friendsReducer'
 import {threadReducer} from './ThreadReducer'
+import {chatMessageReducer} from './ChatMessageReducer'
 export default combineReducers({
     user: authUserReducer,
     form: formReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
     status: ErrorStatusReducer,
     pageoffset: PageReducer,
     userthread:threadReducer,
-    friends: friendsReducer
+    friends: friendsReducer,
+    chatMessages: chatMessageReducer,
 });
