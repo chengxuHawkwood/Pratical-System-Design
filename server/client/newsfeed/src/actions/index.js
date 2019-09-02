@@ -3,7 +3,8 @@ import axios from 'axios';
 import {FETCH_USER, ERROR, PAGINATION ,CREATE_POST, 
       FETCH_POSTS, FETCH_FOLLOWERS, FOLLOW, 
       FETCH_ALREADY_FOLLOWERS, FETCH_FRIENDS} from './types'
-
+import {create_message_thread as cmt} from './messageactions'
+export const create_message_thread = cmt
 export const fetchUser=()=>async (dispatch)=>{
    const user =  await axios.get('/api/current_user');
    dispatch({type:FETCH_USER, payload:user.data });

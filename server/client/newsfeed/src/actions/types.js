@@ -7,3 +7,4 @@ export const FOLLOW = 'follow';
 export const ERROR = 'error';
 export const PAGINATION = 'pagination';
 export const FETCH_FRIENDS = 'fetch_friends';
+export const CREATE_MESSAGE_THREAD ='create_messgae_thread';

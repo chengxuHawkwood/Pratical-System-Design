@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {fetchfriends} from '../actions'
+import {fetchfriends, create_message_thread} from '../actions'
 class FriendsPage extends React.Component{
     componentDidMount(){
         this.props.fetchfriends()
     }
-    sendMessage=()=>{
-
+    sendMessage=(friend_id)=>{
+        this.props.create_message_thread([friend_id, this.props.user._id]);
     }
     renderList(){
         
@@ -38,8 +38,9 @@ class FriendsPage extends React.Component{
 
 const mapStateToProps=(state)=>{
     return {
-        friends: state.friends
+        friends: state.friends,
+        user:state.user
     }
 }
 
-export default connect(mapStateToProps,{fetchfriends})(FriendsPage);
+export default connect(mapStateToProps,{fetchfriends, create_message_thread})(FriendsPage);

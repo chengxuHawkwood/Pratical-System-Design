@@ -7,6 +7,8 @@ const keys = require('./config/dev')
 require('./models/User');
 require('./models/Post');
 require('./models/Friendship');
+require('./models/UserThread');
+require('./models/Thread');
 var redis = require('redis')
 var bluebird = require("bluebird");
 bluebird.promisifyAll(redis);
@@ -39,4 +41,6 @@ require('./routers/authRouter')(app);
 require('./routers/postRouter')(app, client);
 require('./routers/FollowRouter')(app);
 require('./routers/FriendShipRouter')(app);
+require('./routers/threadRouter')(app);
+require('./routers/UserThreadRouter')(app);
 app.listen(5000);
