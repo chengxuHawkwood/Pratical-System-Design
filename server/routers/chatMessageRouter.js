@@ -8,10 +8,10 @@ module.exports=(app)=>{
             const {thread, offset} = req.query;
             console.log(thread, offset);
             showMessages =  await Message.find({threadId:thread})
-            .sort({created_at:-1})
-            .skip(parseInt(offset))
-            .limit(messageConfig.messageLimit).populate('user')
-            res.send(showMessages.reverse());
+                                        .sort({created_at:-1})
+                                        .skip(parseInt(offset))
+                                        .limit(messageConfig.messageLimit).populate('user')
+                                        res.send(showMessages.reverse());
         }catch(error){
             console.log(error);
         }
@@ -27,8 +27,8 @@ module.exports=(app)=>{
             })
             await newmessage.save();
             showMessages =  await Message.find({threadId:thread})
-            .sort({created_at:-1})
-            .limit(messageConfig.messageLimit).populate('user')
+                                        .sort({created_at:-1})
+                                        .limit(messageConfig.messageLimit).populate('user')
 
             res.send(showMessages.reverse());
         }catch(error){

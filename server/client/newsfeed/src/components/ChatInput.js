@@ -2,7 +2,7 @@ import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import {send_message} from '../actions'
-import '../chatInput.css'
+import '../css/chatInput.css'
 class ChatInput extends React.Component{
     renderInput(formProps){
         return(

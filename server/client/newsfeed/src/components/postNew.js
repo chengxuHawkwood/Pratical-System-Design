@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import {createPost} from '../actions';
 import {connect} from 'react-redux'
-import '../postNew.css'
+import '../css/postNew.css'
 class postNew extends React.Component{
     onSubmit=(formValues)=>{
         this.props.createPost(formValues)

@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {fetchFollows} from '../actions'
 import {connect} from 'react-redux'
-import '../SearchBar.css'
+import '../css/SearchBar.css'
 class SearchBar extends React.Component{
 
 

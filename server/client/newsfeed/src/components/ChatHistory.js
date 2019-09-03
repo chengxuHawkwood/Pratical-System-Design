@@ -1,5 +1,5 @@
 import React from 'react'
-import '../chatHistory.css'
+import '../css/chatHistory.css'
 import {connect} from 'react-redux'
 import {fetch_messages} from '../actions'
 class ChatHistory extends React.Component{

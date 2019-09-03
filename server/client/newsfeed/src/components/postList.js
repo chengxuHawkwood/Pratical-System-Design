@@ -2,7 +2,7 @@ import React from 'react'
 import {fetchOwnPosts, unfollow} from '../actions'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import '../postList.css'
+import '../css/postList.css'
 import {pageConf} from '../config/PageConfig'
 class postList extends React.Component{
     componentDidMount(){
