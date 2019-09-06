@@ -8,3 +8,4 @@ Using redis to maintain each IP's recent k visits in m milleseconds where k and 
 Make use of an offset state to manage the pagination.
 # Update:Add core part of chat system. Users that follow each other are considered friends
 Simple version: poll the server every three seconds to get most recent chat history. Use the SHA512 hash result of sorted users list as an index of thread table which represent a chat session between specific users.
+# Update:Add socket which enables server pushed messages to client to support real time service.
