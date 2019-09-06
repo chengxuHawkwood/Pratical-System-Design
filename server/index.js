@@ -46,5 +46,5 @@ require('./routers/FriendShipRouter')(app);
 require('./routers/threadRouter')(app);
 require('./routers/UserThreadRouter')(app);
 require('./routers/chatMessageRouter')(app);
-require('./services/socketio')(app);
+require('./services/socketio')(app, client);
 app.listen(5000);

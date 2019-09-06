@@ -8,7 +8,10 @@ class ChatHistory extends React.Component{
         this.fetch = null;
     }
     componentDidMount(){
-        
+        this.props.fetch_messages(this.props.thread.thread, 0)
+        this.props.socket.on('updateNow', async()=>{
+            this.props.fetch_messages(this.props.thread.thread, 0);
+        })
       //  this.fetch = setInterval(()=>{this.props.fetch_messages(this.props.thread.thread, 0)},3000)
     }
     componentWillUnmount(){

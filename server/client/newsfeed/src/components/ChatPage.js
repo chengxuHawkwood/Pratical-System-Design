@@ -12,18 +12,16 @@ class ChatPage extends React.Component{
            socket: socket,
         };
     }
-    componentDidMount(){
-        this.state.socket.on('message recived', ({hello})=>{console.log('hello');console.log(this.state.socket.id)});
-        this.state.socket.emit('new message', 1000);
+    componentWillUnmount(){
+        this.state.socket.emit('logout', this.props.user);
     }
     render(){
         if(this.props.user){
             this.state.socket.emit('userInfo', this.props.user);
             return(
                 <div className="ui container">
-                    {this.state.message}
-                    <ChatHistory/>
-                    <ChatInput/>
+                    <ChatHistory socket={this.state.socket}/>
+                    <ChatInput socket={this.state.socket}/>
                 </div>
             )
         }else{

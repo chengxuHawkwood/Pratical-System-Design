@@ -14,7 +14,8 @@ module.exports = (app)=>{
         const thread = await Thread.findOne({HashThreadNumber:HashThreadNumber})
         if(!thread){
             const newthread = new Thread({
-                HashThreadNumber:HashThreadNumber
+                HashThreadNumber:HashThreadNumber,
+                participants:participant_ids
             })
             await newthread.save();
             res.send(newthread);

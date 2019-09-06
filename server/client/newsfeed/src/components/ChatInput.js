@@ -13,8 +13,9 @@ class ChatInput extends React.Component{
             </div>
         ) 
     }
-    onSubmit=(formProps)=>{
-        this.props.send_message(formProps.message, this.props.thread.thread);
+    onSubmit=async (formProps)=>{
+        await this.props.send_message(formProps.message, this.props.thread.thread);
+        this.props.socket.emit('new message', this.props.thread.thread);
     }
     render(){
         return(
