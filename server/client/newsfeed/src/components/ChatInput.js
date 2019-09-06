@@ -3,7 +3,9 @@ import {Field, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import {send_message} from '../actions'
 import '../css/chatInput.css'
+
 class ChatInput extends React.Component{
+
     renderInput(formProps){
         return(
             <div className="field ui form ">

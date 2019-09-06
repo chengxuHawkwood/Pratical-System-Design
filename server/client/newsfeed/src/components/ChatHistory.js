@@ -3,9 +3,16 @@ import '../css/chatHistory.css'
 import {connect} from 'react-redux'
 import {fetch_messages} from '../actions'
 class ChatHistory extends React.Component{
+    constructor(props){
+        super(props);
+        this.fetch = null;
+    }
     componentDidMount(){
         
-        setInterval(()=>{this.props.fetch_messages(this.props.thread.thread, 0)},3000)
+      //  this.fetch = setInterval(()=>{this.props.fetch_messages(this.props.thread.thread, 0)},3000)
+    }
+    componentWillUnmount(){
+        if(this.fetch) clearInterval(this.fetch);
     }
     renderList(){
         return this.props.messages.map((message)=>{

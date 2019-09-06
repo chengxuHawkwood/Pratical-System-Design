@@ -10,6 +10,7 @@ require('./models/Friendship');
 require('./models/UserThread');
 require('./models/Message');
 require('./models/Thread');
+
 var redis = require('redis')
 var bluebird = require("bluebird");
 bluebird.promisifyAll(redis);
@@ -45,4 +46,5 @@ require('./routers/FriendShipRouter')(app);
 require('./routers/threadRouter')(app);
 require('./routers/UserThreadRouter')(app);
 require('./routers/chatMessageRouter')(app);
+require('./services/socketio')(app);
 app.listen(5000);

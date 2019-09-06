@@ -19,7 +19,8 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
     "redis": "^2.8.0",
-    "redux-form": "^8.2.6"
+    "redux-form": "^8.2.6",
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
