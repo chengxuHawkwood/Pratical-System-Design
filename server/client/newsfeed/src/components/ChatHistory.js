@@ -2,6 +2,7 @@ import React from 'react'
 import '../css/chatHistory.css'
 import {connect} from 'react-redux'
 import {fetch_messages} from '../actions'
+import '../css/chatHistory.css'
 class ChatHistory extends React.Component{
     constructor(props){
         super(props);
@@ -40,9 +41,8 @@ class ChatHistory extends React.Component{
 
     }
     render(){
-        console.log(this.props.messages);
         return (
-            <div>
+            <div className='history ui container'>
                 {this.renderList()}
             </div>
         )

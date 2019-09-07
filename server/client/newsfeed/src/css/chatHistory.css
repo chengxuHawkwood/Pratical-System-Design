@@ -1,11 +1,14 @@
+.history{
+    align-self: center;
+    flex-grow:1;
+}
+
 .message{
     width:51%;
-    margin: 20%;
+    margin: 10%;
     padding: 20px 20px 20px 20px;
     word-wrap:break-word; 
     word-break:break-all; 
-    flex-direction: column;
-    display: flex
 }
 .mecontent{
     margin: 10px 10px 10px 10px;
@@ -16,6 +19,7 @@
     font-size:1.5em;
     display: inline-block;
 }
+
 .loguser{
     float: right;
 }

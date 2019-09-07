@@ -8,12 +8,13 @@ import FriendNew from './FriendNew'
 import FailureView from './FailureView';
 import FriendsPage from './FriendsPage';
 import ChatPage from './ChatPage';
+import '../css/App.css'
 class App extends React.Component{
   render(){
     return(
       
       <Router history={history}>
-        <div>
+        <div className='app'>
             <Header/>
             <Switch>
                 <Route path="/posts/new" exact component={postNew}/>

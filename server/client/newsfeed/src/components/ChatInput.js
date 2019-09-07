@@ -19,7 +19,7 @@ class ChatInput extends React.Component{
     }
     render(){
         return(
-            <div className="chatInput">
+            <div className="chatInput ui container">
                 <form className="ui form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field  name="message" component={this.renderInput}/>
                 <button className="ui primary button ">send</button>

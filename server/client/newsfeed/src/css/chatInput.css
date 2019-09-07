@@ -1,9 +1,5 @@
 .chatInput{
-    position: absolute;
-    float: left;
-    bottom: 20px;
-    width: 80%;
-    align-content: center
+    align-self: center;
 }
 .sendContent{
     width:90%;

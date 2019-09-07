@@ -3,6 +3,7 @@ import ChatHistory from './ChatHistory'
 import ChatInput from './ChatInput'
 import {connect} from 'react-redux'
 import io from 'socket.io-client';
+import '../css/chatPage.css'
 class ChatPage extends React.Component{
     constructor(props){
         super(props);
@@ -19,10 +20,11 @@ class ChatPage extends React.Component{
         if(this.props.user){
             this.state.socket.emit('userInfo', this.props.user);
             return(
-                <div className="ui container">
+                <div className="chatpage">
                     <ChatHistory socket={this.state.socket}/>
                     <ChatInput socket={this.state.socket}/>
                 </div>
+
             )
         }else{
             return(
